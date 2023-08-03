@@ -1,8 +1,12 @@
 // WeatherComponent.tsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import SearchWeather from "./SearchWeather";
-import { api_Endpoint, api_key } from "../modules";
+import SearchWeather from "./SearchWeatherAPI";
+import {
+  api_Endpoint,
+  api_key,
+  convertUnixTimestampToTime,
+} from "../modules/modules";
 
 //!THE DATA Available to fetch from the api
 export interface WeatherData {
@@ -56,17 +60,6 @@ export interface ForecastData {
   };
 }
 
-//!Convert unix timestamp to human readable time from the api
-export const convertUnixTimestampToTime = (timestamp: number) => {
-  const date = new Date(timestamp * 1000); // Convert to milliseconds
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-
-  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-  const formattedMinutes = minutes.toString().padStart(2, "0");
-  return `${formattedHours}:${formattedMinutes}`;
-};
-
 const WeatherComponent = () => {
   const [currentWeather, setCurrentWeather] = useState<WeatherData | null>(
     null
@@ -96,7 +89,7 @@ const WeatherComponent = () => {
   const fetchCurrentWeather = async (lat: number, lon: number) => {
     const url = `${api_Endpoint}weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
     const response = await axios.get(url);
-    console.log(response.data);
+
     return response.data;
   };
 
@@ -107,7 +100,7 @@ const WeatherComponent = () => {
   ): Promise<ForecastData[]> => {
     const url = `${api_Endpoint}forecast?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
     const response = await axios.get(url);
-    console.log(response.data);
+    console.log("WEATHER:", response.data);
     return response.data.list;
   };
 

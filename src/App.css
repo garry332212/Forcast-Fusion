@@ -1,0 +1,11 @@
+* {
+  margin: 0;
+}
+
+.App {
+  background: linear-gradient(to right, #c7c7eb, #ccf2dd); 
+  /* background: url("./components/assets/bg\ 3.jpg");
+  background-size: cover; */
+ 
+ 
+}
