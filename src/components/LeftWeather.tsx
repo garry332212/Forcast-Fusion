@@ -1,15 +1,14 @@
-import React from "react";
 import { TbSearch } from "react-icons/tb";
 import { TiWeatherPartlySunny } from "react-icons/ti";
-import { searchedDataApi } from "../modules/DisplayItemsData";
-// import logo from "./assets/iconAnimated.gif";
+import FetchWeather from "./FetchWeather";
 
+//!Lest Fetch The Weather Data
 const SearchWeather = () => {
   return (
     <div className="leftSideBar">
       <div className="title">
         <h1>Forcast Fusion</h1>
-        <TiWeatherPartlySunny className="logoIcon"/>
+        <TiWeatherPartlySunny className="logoIcon" />
       </div>
 
       <div className="searchBar">
@@ -17,20 +16,15 @@ const SearchWeather = () => {
         <TbSearch className="icon" />
       </div>
       <div className="searchedData">
-        {searchedDataApi.map((items, index) => (
-          <p key={index}>
-            <span>{items.title}</span>
-            <span>{<items.icon />}</span>
-            <span>{items.value}</span>
-          </p>
-        ))}
+        <FetchWeather />
       </div>
+
       <div className="copyright">
         <p>
-           Created by <span>Gurvinder Singh </span> -
-          <span> Using OpenWeatherMap API  </span> - 
-          <span> Created In ReactJS + Typescript </span>
-          - <span>Version 1.0.0</span>
+          Created by <span>Gurvinder Singh </span> -
+          <span> Using OpenWeatherMap API </span> -
+          <span> Created In ReactJS + Typescript </span>-{" "}
+          <span>Version 1.0.0</span>
         </p>
 
         <a

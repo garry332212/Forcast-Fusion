@@ -55,23 +55,25 @@ const ForcastComponent = () => {
         <div className="forecastHeading">
           <h1>Forecast </h1>
           {/* <img src={forecastImg} alt="forecast" /> */}
-          <FaCloudMoonRain className="forecastIcon"/>
+          <FaCloudMoonRain className="forecastIcon" />
         </div>
 
         <div className="forcastHourly">
-          <div className="heading">
-            <p>Hours</p>
-            <p>Min</p>
-            <p>Max</p>
-          </div>
-
-          {forcastHourly.map((forcast, index) => (
-            <div className="minMaxWeatherHorly" key={index}>
-              <p>{forcast.time}</p>
-              <p>{forcast.min}</p>
-              <p>{forcast.max}</p>
+          <div className="labels">
+            <div className="heading">
+              <p>Hours</p>
+              <p>Min</p>
+              <p>Max</p>
             </div>
-          ))}
+
+            {forcastHourly.map((forcast, index) => (
+              <div className="minMaxWeatherHorly" key={index}>
+                <p>{forcast.time}</p>
+                <p>{forcast.min}</p>
+                <p>{forcast.max}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

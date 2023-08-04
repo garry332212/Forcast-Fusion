@@ -5,14 +5,13 @@ import { fontFamily } from "../modules/styles";
 export const WeatherMainContainer = styled.div`
   .container {
     height: 100vh;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   .weatherContainer {
-    width: 80%;
+    width: 90%;
     background-color: #ffffff7d;
     backdrop-filter: blur(33px);
     box-sizing: border-box;
@@ -20,7 +19,6 @@ export const WeatherMainContainer = styled.div`
     box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
     transition: all 0.4s ease-in-out;
     animation: slideIn 1s ease-in;
-    /* width: calc(100% - 4rem); */
   }
 
   //!slide in effect keyframe
@@ -37,22 +35,20 @@ export const WeatherMainContainer = styled.div`
 
   .splitWeather {
     display: flex;
-
     //!SearchWeather Styles From Here
     .leftSideBar {
       border-radius: 10px;
       box-shadow: 5px 0 10px rgba(0, 0, 0, 0.07);
       padding: 10px;
-      width: 40%;
+      width: 35%;
 
       .title {
         display: flex;
         justify-content: space-between;
         padding: 5px 20px;
 
-        > h1 {
+        h1 {
           font-family: ${fontFamily.roboto};
-          position: relative;
         }
         .logoIcon {
           font-size: 2.5rem;
@@ -61,7 +57,7 @@ export const WeatherMainContainer = styled.div`
       }
 
       .searchedData {
-        margin-top: 2rem;
+        margin-top: 1rem;
         list-style: none;
         display: flex;
         flex-direction: column;
@@ -75,29 +71,26 @@ export const WeatherMainContainer = styled.div`
           margin-bottom: 20px;
           align-items: center;
           width: 90%;
-          box-shadow: 1px 1px 10px -6px rgba(0, 0, 0, 0.4);
-          border-radius: 20px;
-          padding: 20px;
+          box-shadow: 1px 1px 10px -4px rgba(0, 0, 0, 0.2);
+          border-radius: 50px;
+          padding: 12px;
+          font-size: 18px;
 
-          > span {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
+          .titleSpan {
+            flex: 1;
           }
-        }
 
-        //select the span with icons
-        p:nth-child(1) > span:nth-child(2),
-        p:nth-child(2) > span:nth-child(2),
-        p:nth-child(3) > span:nth-child(2),
-        p:nth-child(4) > span:nth-child(2),
-        p:nth-child(5) > span:nth-child(2),
-        p:nth-child(6) > span:nth-child(2),
-        p:nth-child(7) > span:nth-child(2) {
-          color: #610094;
-          position: absolute;
-          left: 20.2%;
-          font-size: 30px;
+          .iconsSpan {
+            color: #610094;
+            font-size: 25px;
+            vertical-align: middle; /* Align icons vertically */
+            width: 50px;
+            text-align: center;
+          }
+          .resultSpan {
+            flex: 1;
+            text-align: right;
+          }
         }
       }
 
@@ -107,6 +100,7 @@ export const WeatherMainContainer = styled.div`
         align-items: center;
         font-family: ${fontFamily.description};
         text-align: center;
+        padding: 10px;
 
         p:nth-child(1) > span:nth-child(1) {
           font-weight: 600;
@@ -123,8 +117,7 @@ export const WeatherMainContainer = styled.div`
 
     //!ForcastComponent Styles From Here
     .rightSideBar {
-      height: 79.8vh;
-      width: 60%;
+      width: 65%;
       padding: 10px;
 
       //! Toggle Beteen C & F units
@@ -197,7 +190,7 @@ export const WeatherMainContainer = styled.div`
           line-height: 1;
 
           h1 {
-            font-size: 4rem;
+            font-size: 3.4rem;
           }
 
           p {
@@ -213,40 +206,43 @@ export const WeatherMainContainer = styled.div`
 
           .forcastDescription {
             font-family: ${fontFamily.description};
-            font-size: 1.6rem;
             margin-left: 1rem;
 
+            h1 {
+              font-size: 2.4rem;
+            }
             p {
               font-weight: 600;
               line-height: 1.6;
+              font-size: 19px;
             }
 
             em {
               position: relative;
-              font-size: 20px;
+              font-size: 16px;
 
               .windIcon {
                 color: grey;
                 position: absolute;
                 top: 0;
                 margin-left: 6px;
-                font-size: 2rem;
+                font-size: 1.4rem;
               }
             }
           }
 
           .sideWeatherUnit {
-            font-size: 3rem;
-            text-align: right;
-
             h1 {
               font-family: ${fontFamily.temprature};
+              font-size: 7em;
+              position: relative;
+              left: 60px;
             }
 
             h1 > span:nth-child(1) {
               position: relative;
               bottom: 22px;
-              right: 25px;
+              right: 29px;
               font-size: 0.8em;
               font-family: ${fontFamily.description};
             }
@@ -254,16 +250,16 @@ export const WeatherMainContainer = styled.div`
             span:nth-child(2) {
               font-size: 0.5em;
               position: relative;
-              bottom: 55px;
-              right: 45px;
-              color: rgba(0, 0, 0, 0.7);
-              font-family: ${fontFamily.wind};
+              bottom: 65px;
+              right: 65px;
+              font-family: ${fontFamily.input};
             }
             p {
-              font-size: 0.8em;
+              font-size: 2em;
               margin-left: 10px;
               line-height: 0.2;
               font-family: ${fontFamily.input};
+              text-align: right;
             }
           }
         }
@@ -295,6 +291,10 @@ export const WeatherMainContainer = styled.div`
             position: relative;
 
             /* Side labels for min max temprature */
+            .labels {
+              display: flex;
+            }
+
             .heading {
               font-size: 1.2rem;
               position: absolute;
@@ -303,8 +303,8 @@ export const WeatherMainContainer = styled.div`
               color: #fff;
 
               p {
-                margin-top: 15px;
-                padding-right: 20px;
+                margin-top: 16px;
+                padding-right: 14px;
                 background-color: #000;
                 border-radius: 0 20px 20px 0;
               }
@@ -317,7 +317,8 @@ export const WeatherMainContainer = styled.div`
           font-size: 1.5rem;
           margin-left: 30px;
           p {
-            padding: 4px;
+            padding-inline: 18px;
+            padding-block: 4px;
           }
         }
 
@@ -330,8 +331,6 @@ export const WeatherMainContainer = styled.div`
           align-items: center;
 
           .citiesInfo {
-            position: relative;
-            top: 40px;
             text-align: center;
             margin-top: 2rem;
 
@@ -361,7 +360,7 @@ export const WeatherMainContainer = styled.div`
         height: 35px;
         border: none;
         outline: none;
-        box-shadow: 1px 1px 10px -2px grey;
+        box-shadow: 1px 1px 13px -8px rgba(0, 0, 0, 0.8);
         border-radius: 20px;
         padding-right: 30px;
         font-family: ${fontFamily.input};
@@ -442,7 +441,65 @@ export const WeatherMainContainer = styled.div`
   }
 
   /* Large screens (e.g., desktops) */
-  //!All Above 1024px
-  @media (min-width: 1024px) {
+  //!Above 1024px till 1380px
+  @media (min-width: 1024px) and (max-width: 1380px) {
+    .weatherContainer {
+      width: 90%;
+    }
+    .splitWeather {
+      //!SearchWeather Styles From Here
+      .leftSideBar {
+        padding: 10px;
+        .title {
+          padding: 5px;
+        }
+        .searchedData {
+          p {
+            padding: 12px;
+            margin-block: 6px;
+          }
+        }
+      }
+
+      //!ForcastComponent Styles From Here
+      .rightSideBar {
+        .forcastContainer {
+          .topSectionWeather {
+            .forcastDescription {
+              margin-left: 0px;
+            }
+          }
+
+          //! middle section for Forecasting
+          .middleForcasting {
+            border-top: 1px solid grey;
+            .forcastHourly {
+              .heading {
+                font-size: 1rem;
+                p {
+                  margin-top: 13.5px;
+                  padding-block: 0.5px;
+                }
+              }
+            }
+          }
+          .minMaxWeatherHorly {
+            font-size: 1.2rem;
+          }
+          /* //! Bottom Section for Major Cities Weather  */
+          .bottomSection {
+            border-top: 1px solid grey;
+            .citiesInfo {
+              > p:nth-child(1) {
+                font-size: 3rem;
+              }
+              > p:nth-child(2) {
+                font-size: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `;

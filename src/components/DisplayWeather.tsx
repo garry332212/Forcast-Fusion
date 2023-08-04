@@ -1,7 +1,7 @@
 import React from "react";
 import { WeatherMainContainer } from "../CSS/styles.modules";
 import ForcastComponent from "./ForcastComponent";
-import SearchWeather from "./SearchWeather";
+import SearchWeather from "./LeftWeather";
 
 /*!this Component  Is Parent Component of*/ //*!<SearchWeather/> & <ForcastComponent />
 
