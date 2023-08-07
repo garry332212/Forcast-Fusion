@@ -1,7 +1,7 @@
 import React from "react";
 import { WeatherMainContainer } from "../CSS/styles.modules";
 import ForcastComponent from "./ForcastComponent";
-import SearchWeather from "./LeftWeather";
+import LeftWeather from "./LeftWeather";
 
 /*!this Component  Is Parent Component of*/ //*!<SearchWeather/> & <ForcastComponent />
 
@@ -11,9 +11,9 @@ const DisplayWeather = () => {
       <div className="container">
         <div className="weatherContainer">
           <div className="splitWeather">
-           <SearchWeather />
+           <LeftWeather />
             <div className="rightSideBar">
-              <ForcastComponent />
+              <ForcastComponent/>
             </div>
           </div>
         </div>

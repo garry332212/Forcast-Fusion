@@ -4,7 +4,7 @@ import React from "react";
 interface WeatherInfoProps {
   title: string;
   value: string | number;
-  icon?: React.ReactNode;
+  icon: React.ReactNode;
 }
 
 const WeatherInfo: React.FC<WeatherInfoProps> = ({ title, value,icon }) => {

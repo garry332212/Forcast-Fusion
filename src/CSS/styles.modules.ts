@@ -233,17 +233,18 @@ export const WeatherMainContainer = styled.div`
 
           .sideWeatherUnit {
             h1 {
-              font-family: ${fontFamily.temprature};
+              font-family: ${fontFamily.description};
               font-size: 7em;
               position: relative;
-              left: 60px;
+              left: 40px;
             }
 
             h1 > span:nth-child(1) {
               position: relative;
               bottom: 22px;
-              right: 29px;
+              right: 10px;
               font-size: 0.8em;
+              padding: 10px;
               font-family: ${fontFamily.description};
             }
 
@@ -251,13 +252,13 @@ export const WeatherMainContainer = styled.div`
               font-size: 0.5em;
               position: relative;
               bottom: 65px;
-              right: 65px;
+              right: 45px;
               font-family: ${fontFamily.input};
             }
             p {
               font-size: 2em;
               margin-left: 10px;
-              line-height: 0.2;
+              line-height: 1;
               font-family: ${fontFamily.input};
               text-align: right;
             }
@@ -276,7 +277,7 @@ export const WeatherMainContainer = styled.div`
             align-items: center;
             h1 {
               text-align: center;
-              margin: 10px;
+              margin: 5px;
               font-size: 25px;
             }
             .forecastIcon {
@@ -286,14 +287,9 @@ export const WeatherMainContainer = styled.div`
 
           .forcastHourly {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-evenly;
             text-align: center;
             position: relative;
-
-            /* Side labels for min max temprature */
-            .labels {
-              display: flex;
-            }
 
             .heading {
               font-size: 1.2rem;
@@ -301,48 +297,32 @@ export const WeatherMainContainer = styled.div`
               left: -9px;
               text-align: left;
               color: #fff;
-
+              p:nth-child(1) {
+                margin-top: 20px;
+                font-size: 25px;
+              }
               p {
-                margin-top: 16px;
+                margin-top: 2.5rem;
                 padding-right: 14px;
                 background-color: #000;
                 border-radius: 0 20px 20px 0;
+                font-size: 2rem;
               }
             }
           }
         }
-
         .minMaxWeatherHorly {
-          padding-top: 10px;
-          font-size: 1.5rem;
           margin-left: 30px;
-          p {
-            padding-inline: 18px;
-            padding-block: 4px;
+          
+          p:nth-child(1) {
+            margin-top: 20px;
+            font-size: 25px;
+            font-family: ${fontFamily.roboto};
           }
-        }
-
-        /* //! Bottom Section for Major Cities Weather  */
-        .bottomSection {
-          border-top: 1px solid grey;
-          margin-top: 10px;
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-
-          .citiesInfo {
-            text-align: center;
-            margin-top: 2rem;
-
-            > p:nth-child(1) {
-              font-size: 5rem;
-              font-family: ${fontFamily.roboto};
-              letter-spacing: -6px;
-            }
-            > p:nth-child(2) {
-              font-size: 20px;
-              font-family: ${fontFamily.description};
-            }
+          p {
+            margin-top: 1.5rem;
+            font-size: 3rem;
+            font-family: ${fontFamily.description};
           }
         }
       }
@@ -472,7 +452,6 @@ export const WeatherMainContainer = styled.div`
 
           //! middle section for Forecasting
           .middleForcasting {
-            border-top: 1px solid grey;
             .forcastHourly {
               .heading {
                 font-size: 1rem;
@@ -485,10 +464,10 @@ export const WeatherMainContainer = styled.div`
           }
           .minMaxWeatherHorly {
             font-size: 1.2rem;
+            
           }
           /* //! Bottom Section for Major Cities Weather  */
           .bottomSection {
-            border-top: 1px solid grey;
             .citiesInfo {
               > p:nth-child(1) {
                 font-size: 3rem;
