@@ -100,7 +100,6 @@ const WeatherComponent = () => {
   ): Promise<ForecastData[]> => {
     const url = `${api_Endpoint}forecast?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
     const response = await axios.get(url);
-    console.log("WEATHER:", response.data);
     return response.data.list;
   };
 

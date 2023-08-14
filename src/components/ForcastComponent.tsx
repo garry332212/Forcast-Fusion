@@ -1,6 +1,7 @@
 import React from "react";
 import ShowForcast from "./ShowForcast";
 import { fetchForecast } from "../modules/DisplayItemsData";
+import loading from "./assets/Loading.gif";
 
 //!THE  forcast data props
 export interface ForecastData {
@@ -26,7 +27,7 @@ export interface ForecastData {
 }
 
 const ForcastComponent = () => {
-  const [isCelsius, setIsCelsius] = React.useState(true); // Initial state is Celsius
+  const [isCelsius, setIsCelsius] = React.useState(true);
   const [forecastData, setForecastData] = React.useState<ForecastData[]>([]);
 
   const handleToggle = () => {
@@ -41,8 +42,9 @@ const ForcastComponent = () => {
           const [forecastWeatherData] = await Promise.all([
             fetchForecast(latitude, longitude),
           ]);
-
-          setForecastData(forecastWeatherData);
+          setTimeout(() => {
+            setForecastData(forecastWeatherData);
+          }, 2000);
         } catch (error) {
           console.error(error);
         }
@@ -52,7 +54,6 @@ const ForcastComponent = () => {
       }
     );
   }, []);
-
 
   return (
     <div className="forcastContainer">
@@ -76,12 +77,14 @@ const ForcastComponent = () => {
           description={forecastData[0].weather[0].description}
           speed={forecastData[0].wind.speed}
           minMaxData={forecastData.slice(0, 4)}
+          isCelsius={isCelsius}
         />
       ) : (
-        <p>Loading forecast data...</p>
+        <div className="loadingWeather">
+          <img src={loading} alt="img" />
+          <p>Loading Forcast</p>
+        </div>
       )}
-
-      {/* {isCelsius ? 'Display Celsius Weather' : 'Display Fahrenheit Weather'} */}
     </div>
   );
 };

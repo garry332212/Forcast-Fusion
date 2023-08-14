@@ -1,7 +1,7 @@
 export const api_key = "0cc86d16bf572f78cdc96c096c7627e5";
 export const api_Endpoint = "https://api.openweathermap.org/data/2.5/";
 
-//corresponding type declarations
+
 
 
 
@@ -15,4 +15,8 @@ export const convertUnixTimestampToTime = (timestamp: number) => {
   const formattedMinutes = minutes.toString().padStart(2, "0");
   return `${formattedHours}:${formattedMinutes}`;
 };
+
+
+//!Celsius to Fah conversion 
+export const celsiusToFahrenheit = (celsius: number) => (celsius * 9 / 5) + 32;
 

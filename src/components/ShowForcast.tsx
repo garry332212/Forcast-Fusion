@@ -1,10 +1,9 @@
 import React from "react";
 import { BsWind } from "react-icons/bs";
 import { FaCloudMoonRain } from "react-icons/fa";
-// import forecastImg from "./assets/forecast.gif";
 import { formatTime, dateFormatted } from "../modules/DisplayItemsData";
 import { ForecastData } from "./ForcastComponent";
-
+import { celsiusToFahrenheit } from "../modules/modules";
 interface forcastProps {
   dt_txt: string;
   name: string;
@@ -14,6 +13,7 @@ interface forcastProps {
   description: string;
   speed: string;
   minMaxData: ForecastData[];
+  isCelsius: boolean;
 }
 
 const ShowForcast: React.FC<forcastProps> = ({
@@ -25,7 +25,21 @@ const ShowForcast: React.FC<forcastProps> = ({
   description,
   speed,
   minMaxData,
+  isCelsius,
 }) => {
+  //!Changing the wather from C° to F°
+
+  const TemperatureDisplay: React.FC<{
+    value: number;
+    isCelsius: boolean;
+    celsiusToFahrenheit: (celsius: number) => number;
+  }> = ({ value, isCelsius, celsiusToFahrenheit }) => (
+    <p>
+      {isCelsius ? value.toFixed(0) : celsiusToFahrenheit(value).toFixed(0)}
+       <span className="celsiusFahr">{isCelsius ? "°C" : "°F"}</span>
+    </p>
+  );
+
   return (
     <div>
       <div className="cityName">
@@ -46,10 +60,9 @@ const ShowForcast: React.FC<forcastProps> = ({
           </em>
         </div>
         <div className="sideWeatherUnit">
-          {/* this span VALUE C should change if handle toggle is In F */}
           <h1>
-            {temp.toFixed(0)}
-            <span>°</span> <span>C</span>
+            {isCelsius ? temp.toFixed(0) : celsiusToFahrenheit(temp).toFixed(0)}{" "}
+            <span>°</span> <span>{isCelsius ? "C" : "F"}</span>
           </h1>
           <p>{main}</p>
         </div>
@@ -73,8 +86,16 @@ const ShowForcast: React.FC<forcastProps> = ({
           {minMaxData.map((forcastHourly, index) => (
             <div className="minMaxWeatherHorly" key={index}>
               <p>{formatTime(forcastHourly.dt)}</p>
-              <p>{forcastHourly.main.temp_min.toFixed(0)}°c</p>
-              <p>{forcastHourly.main.temp_max.toFixed(0)}°c</p>
+              <TemperatureDisplay
+                value={forcastHourly.main.temp_min}
+                isCelsius={isCelsius}
+                celsiusToFahrenheit={celsiusToFahrenheit}
+              />
+              <TemperatureDisplay
+                value={forcastHourly.main.temp_max}
+                isCelsius={isCelsius}
+                celsiusToFahrenheit={celsiusToFahrenheit}
+              />
             </div>
           ))}
         </div>

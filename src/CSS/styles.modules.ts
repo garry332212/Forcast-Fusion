@@ -128,6 +128,24 @@ export const WeatherMainContainer = styled.div`
           justify-content: flex-end;
           margin: 10px;
         }
+        .loadingWeather {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 60vh;
+          flex-direction: column;
+          position: relative;
+
+          img {
+            height: 150px;
+          }
+
+          p {
+            font-family: ${fontFamily.description};
+            margin-top: 20px;
+            font-weight: 800;
+          }
+        }
 
         .temperatureToggle > p {
           color: grey;
@@ -236,13 +254,13 @@ export const WeatherMainContainer = styled.div`
               font-family: ${fontFamily.description};
               font-size: 7em;
               position: relative;
-              left: 40px;
+              left: 30px;
             }
 
             h1 > span:nth-child(1) {
               position: relative;
               bottom: 22px;
-              right: 10px;
+              right: 35px;
               font-size: 0.8em;
               padding: 10px;
               font-family: ${fontFamily.description};
@@ -252,7 +270,7 @@ export const WeatherMainContainer = styled.div`
               font-size: 0.5em;
               position: relative;
               bottom: 65px;
-              right: 45px;
+              right: 70px;
               font-family: ${fontFamily.input};
             }
             p {
@@ -292,28 +310,36 @@ export const WeatherMainContainer = styled.div`
             position: relative;
 
             .heading {
-              font-size: 1.2rem;
               position: absolute;
               left: -9px;
               text-align: left;
               color: #fff;
               p:nth-child(1) {
-                margin-top: 20px;
-                font-size: 25px;
+                margin-top: 25px;
+                font-size: 20px;
+                padding-block: 1px;
+                background-color: #000;
+                border-radius: 0 20px 20px 0;
               }
-              p {
-                margin-top: 2.5rem;
+              p:nth-child(2),
+              p:nth-child(3) {
+                margin-top: 3rem;
                 padding-right: 14px;
                 background-color: #000;
                 border-radius: 0 20px 20px 0;
-                font-size: 2rem;
+                font-size: 1.5rem;
               }
             }
           }
         }
         .minMaxWeatherHorly {
           margin-left: 30px;
-          
+
+          .celsiusFahr {
+            font-size: 22px;
+            position: absolute;
+          }
+
           p:nth-child(1) {
             margin-top: 20px;
             font-size: 25px;
@@ -454,17 +480,24 @@ export const WeatherMainContainer = styled.div`
           .middleForcasting {
             .forcastHourly {
               .heading {
-                font-size: 1rem;
-                p {
-                  margin-top: 13.5px;
-                  padding-block: 0.5px;
+                p:nth-child(1) {
+                  margin-top: 20px;
+                }
+                p:nth-child(2),
+                p:nth-child(3) {
+                  margin-top: 1.8rem;
+                  font-size: 1.5rem;
                 }
               }
             }
           }
           .minMaxWeatherHorly {
-            font-size: 1.2rem;
-            
+            p:nth-child(1) {
+              font-size: 1rem;
+            }
+            p {
+              font-size: 2rem;
+            }
           }
           /* //! Bottom Section for Major Cities Weather  */
           .bottomSection {

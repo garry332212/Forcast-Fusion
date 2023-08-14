@@ -1,4 +1,3 @@
-import React from "react";
 import { WeatherMainContainer } from "../CSS/styles.modules";
 import ForcastComponent from "./ForcastComponent";
 import LeftWeather from "./LeftWeather";

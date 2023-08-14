@@ -1,12 +1,11 @@
-
 import React from "react";
-
+import loadingGif from "./assets/weather.gif";
 import WeatherInfo from "./WeatherInfo";
 import { GiModernCity } from "react-icons/gi";
 import { WiHumidity, WiSunrise, WiSunset } from "react-icons/wi";
-import { PiThermometerCold,PiFlagDuotone } from "react-icons/pi";
+import { PiThermometerCold, PiFlagDuotone } from "react-icons/pi";
 import { TiWeatherStormy } from "react-icons/ti";
-import { fetchCurrentWeather, formatTime } from './../modules/DisplayItemsData';
+import { fetchCurrentWeather, formatTime } from "./../modules/DisplayItemsData";
 
 export interface WeatherData {
   name: string;
@@ -33,20 +32,27 @@ export interface WeatherData {
   }[];
 }
 
-const FetchWeather = () => {
+const FetchWeather: React.FC<{ cityName: string }> = ({ cityName }) => {
   const [currentWeather, setCurrentWeather] =
     React.useState<WeatherData | null>(null);
 
+  const [loading, isLoading] = React.useState(false);
+
   React.useEffect(() => {
+
+
     // Get user's current location weather and forecast
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        Promise.all([
-          fetchCurrentWeather(latitude, longitude),
-        ]).then(([currentWeatherData]) => {
-          setCurrentWeather(currentWeatherData);
-        });
+        Promise.all([fetchCurrentWeather(latitude, longitude)]).then(
+          ([currentWeatherData]) => {
+            setCurrentWeather(currentWeatherData);
+            setTimeout(() => {
+              isLoading(true);
+            }, 2000);
+          }
+        );
       },
       (error) => {
         console.error(error);
@@ -54,57 +60,63 @@ const FetchWeather = () => {
     );
   }, []);
 
-
-
-
   return (
     <>
-    {currentWeather ? (
-      <>
-        <WeatherInfo title="City" value={currentWeather.name} icon={<GiModernCity/>}/>
+    
+      {currentWeather && loading ? (
+        <>
+          <WeatherInfo
+            title="City"
+            value={currentWeather.name}
+            icon={<GiModernCity />}
+          />
 
-        {currentWeather.sys && (
-          <WeatherInfo title="Country" value={currentWeather.sys.country} icon={<PiFlagDuotone/>}/>
-        )}
-        <WeatherInfo
-          title="Temperature"
-          value={`${currentWeather.main.temp.toFixed(0)}°C`}
-          icon={<TiWeatherStormy/>}
-          
-        />
-        <WeatherInfo
-          title="Feels Like"
-          value={`${currentWeather.main.feels_like.toFixed(0)}°C`}
-          icon={<PiThermometerCold/>}
-        />
-        <WeatherInfo
-          title="Humidity"
-          value={`${currentWeather.main.humidity}%`}
-          icon={<WiHumidity/>}
-        />
-        {currentWeather.sys && (
-          <>
+          {currentWeather.sys && (
             <WeatherInfo
-              title="Sunrise"
-              value={formatTime(currentWeather.sys.sunrise)}
-              icon={<WiSunrise/>}
+              title="Country"
+              value={currentWeather.sys.country}
+              icon={<PiFlagDuotone />}
             />
-            <WeatherInfo
-              title="Sunset"
-              value={formatTime(currentWeather.sys.sunset)}
-              icon={<WiSunset/>}
-            />
-          </>
-        )}
-      </>
-    ) : (
-      <p>Loading...</p>
-    )}
-  </>
-);
+          )}
+          <WeatherInfo
+            title="Temperature"
+            value={`${currentWeather.main.temp.toFixed(0)}°C`}
+            icon={<TiWeatherStormy />}
+          />
+          <WeatherInfo
+            title="Feels Like"
+            value={`${currentWeather.main.feels_like.toFixed(0)}°C`}
+            icon={<PiThermometerCold />}
+          />
+          <WeatherInfo
+            title="Humidity"
+            value={`${currentWeather.main.humidity}%`}
+            icon={<WiHumidity />}
+          />
+          {currentWeather.sys && (
+            <>
+              <WeatherInfo
+                title="Sunrise"
+                value={formatTime(currentWeather.sys.sunrise)}
+                icon={<WiSunrise />}
+              />
+              <WeatherInfo
+                title="Sunset"
+                value={formatTime(currentWeather.sys.sunset)}
+                icon={<WiSunset />}
+              />
+            </>
+          )}
+        </>
+      ) : (
+        <img
+          style={{ height: "200px", paddingBlock: "3rem" }}
+          src={loadingGif}
+          alt="img"
+        />
+      )}
+    </>
+  );
 };
-
-
-
 
 export default FetchWeather;

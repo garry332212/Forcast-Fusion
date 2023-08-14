@@ -1,9 +1,11 @@
 import { TbSearch } from "react-icons/tb";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import FetchWeather from "./FetchWeather";
+import React from "react";
 
 //!Lest Fetch The Weather Data
 const SearchWeather = () => {
+  const [cityName, setCityName] = React.useState("");
   return (
     <div className="leftSideBar">
       <div className="title">
@@ -12,11 +14,16 @@ const SearchWeather = () => {
       </div>
 
       <div className="searchBar">
-        <input type="text" />
+        <input
+          type="text"
+          value={cityName}
+          onChange={(e) => setCityName(e.target.value)}
+        />
+
         <TbSearch className="icon" />
       </div>
       <div className="searchedData">
-        <FetchWeather />
+        <FetchWeather cityName={cityName} />
       </div>
 
       <div className="copyright">
