@@ -36,7 +36,7 @@ const ShowForcast: React.FC<forcastProps> = ({
   }> = ({ value, isCelsius, celsiusToFahrenheit }) => (
     <p>
       {isCelsius ? value.toFixed(0) : celsiusToFahrenheit(value).toFixed(0)}
-       <span className="celsiusFahr">{isCelsius ? "°C" : "°F"}</span>
+      <span className="celsiusFahr">{isCelsius ? "°C" : "°F"}</span>
     </p>
   );
 

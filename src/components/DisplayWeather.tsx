@@ -1,3 +1,4 @@
+import React from "react";
 import { WeatherMainContainer } from "../CSS/styles.modules";
 import ForcastComponent from "./ForcastComponent";
 import LeftWeather from "./LeftWeather";
@@ -5,14 +6,37 @@ import LeftWeather from "./LeftWeather";
 /*!this Component  Is Parent Component of*/ //*!<SearchWeather/> & <ForcastComponent />
 
 const DisplayWeather = () => {
+  const [weatherCondition, setWeatherCondition] = React.useState("");
+
+  const getBackgroundClassFromWeather = (weather: string) => {
+    switch (weather) {
+      case "Rain":
+      case "Drizzle":
+        return "rainy-bg";
+      case "Clear":
+        return "sunny-bg";
+      case "Clouds":
+        return "cloudy-bg";
+      // Add more cases for other weather conditions...
+      default:
+        return "default-bg"; // Or any default background class
+    }
+  };
+
+  React.useEffect(() => {
+    console.log(weatherCondition);
+  });
+
   return (
     <WeatherMainContainer>
       <div className="container">
-        <div className="weatherContainer">
+        <div className={getBackgroundClassFromWeather(weatherCondition)}>
           <div className="splitWeather">
-           <LeftWeather />
+            <LeftWeather />
             <div className="rightSideBar">
-              <ForcastComponent/>
+              <ForcastComponent
+                onWeatherConditionChange={setWeatherCondition}
+              />
             </div>
           </div>
         </div>

@@ -25,8 +25,13 @@ export interface ForecastData {
     speed: string;
   };
 }
+interface ForcastComponentProps {
+  onWeatherConditionChange: (condition: string) => void;
+}
 
-const ForcastComponent = () => {
+const ForcastComponent: React.FC<ForcastComponentProps> = ({
+  onWeatherConditionChange,
+}) => {
   const [isCelsius, setIsCelsius] = React.useState(true);
   const [forecastData, setForecastData] = React.useState<ForecastData[]>([]);
 
@@ -44,6 +49,11 @@ const ForcastComponent = () => {
           ]);
           setTimeout(() => {
             setForecastData(forecastWeatherData);
+            if (forecastWeatherData.length > 0) {
+              const currentWeatherCondition =
+                forecastWeatherData[0].weather[0].main;
+              onWeatherConditionChange(currentWeatherCondition);
+            }
           }, 2000);
         } catch (error) {
           console.error(error);
@@ -53,7 +63,7 @@ const ForcastComponent = () => {
         console.error(error);
       }
     );
-  }, []);
+  }, [onWeatherConditionChange]);
 
   return (
     <div className="forcastContainer">

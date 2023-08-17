@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { fontFamily } from "../modules/styles";
+import cloudy from "../components/assets/clouds.jpg";
+import rainy from "../components/assets/rain.jpg";
+import Clear from "../components/assets/Clear.jpg";
 
 //*Display Weather Styles
 export const WeatherMainContainer = styled.div`
@@ -10,15 +13,38 @@ export const WeatherMainContainer = styled.div`
     align-items: center;
   }
 
-  .weatherContainer {
+  .rainy-bg {
+    background-image: url(${rainy});
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .sunny-bg {
+    background-image: url(${Clear});
+    //text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+  }
+
+  .cloudy-bg {
+    background-image: url(${cloudy});
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+  }
+
+  .default-bg,
+  .cloudy-bg,
+  .sunny-bg,
+  .rainy-bg {
     width: 90%;
-    background-color: #ffffff7d;
-    backdrop-filter: blur(33px);
+    background-size: cover;
+    background-position: center center;
     box-sizing: border-box;
     border-radius: 10px;
     box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
-    transition: all 0.4s ease-in-out;
+    color: whitesmoke;
+    transition: all 2s ease-in-out;
     animation: slideIn 1s ease-in;
+  }
+
+  .default-bg {
+    background-color: #ffffff7d;
   }
 
   //!slide in effect keyframe
@@ -52,7 +78,7 @@ export const WeatherMainContainer = styled.div`
         }
         .logoIcon {
           font-size: 2.5rem;
-          color: #321e1e;
+          color: whitesmoke;
         }
       }
 
@@ -71,7 +97,7 @@ export const WeatherMainContainer = styled.div`
           margin-bottom: 20px;
           align-items: center;
           width: 90%;
-          box-shadow: 1px 1px 10px -4px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 10px -4px rgba(255, 255, 255, 0.8);
           border-radius: 50px;
           padding: 12px;
           font-size: 18px;
@@ -366,12 +392,13 @@ export const WeatherMainContainer = styled.div`
         height: 35px;
         border: none;
         outline: none;
-        box-shadow: 1px 1px 13px -8px rgba(0, 0, 0, 0.8);
+        box-shadow: 1px 1px 13px -3px rgba(255, 255, 255, 22);
         border-radius: 20px;
         padding-right: 30px;
         font-family: ${fontFamily.input};
         font-size: 18px;
         background-color: transparent;
+        color: white;
       }
 
       .icon {
@@ -380,7 +407,7 @@ export const WeatherMainContainer = styled.div`
         right: 10px;
         padding-right: 12px;
         transform: translateY(-50%);
-        color: grey;
+        color: whitesmoke;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         font-size: 20px;

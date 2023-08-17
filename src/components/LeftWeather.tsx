@@ -28,7 +28,7 @@ const SearchWeather = () => {
 
       <div className="copyright">
         <p>
-          Created by <span>Gurvinder Singh </span> -
+          Created by <span>Guri </span> -
           <span> Using OpenWeatherMap API </span> -
           <span> Created In ReactJS + Typescript </span>-{" "}
           <span>Version 1.0.0</span>
