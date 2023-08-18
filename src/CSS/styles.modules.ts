@@ -13,6 +13,30 @@ export const WeatherMainContainer = styled.div`
     align-items: center;
   }
 
+  .loadingWeather {
+    position: fixed;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #c7c7eb, #ccf2dd);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; 
+
+    img {
+      height: 150px;
+    }
+
+    p {
+      font-family: ${fontFamily.description};
+      margin-top: 20px;
+      font-weight: 800;
+    }
+  }
+
   .rainy-bg {
     background-image: url(${rainy});
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -153,24 +177,6 @@ export const WeatherMainContainer = styled.div`
           align-items: center;
           justify-content: flex-end;
           margin: 10px;
-        }
-        .loadingWeather {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 60vh;
-          flex-direction: column;
-          position: relative;
-
-          img {
-            height: 150px;
-          }
-
-          p {
-            font-family: ${fontFamily.description};
-            margin-top: 20px;
-            font-weight: 800;
-          }
         }
 
         .temperatureToggle > p {

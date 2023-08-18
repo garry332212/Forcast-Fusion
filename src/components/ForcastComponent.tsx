@@ -1,7 +1,7 @@
 import React from "react";
 import ShowForcast from "./ShowForcast";
 import { fetchForecast } from "../modules/DisplayItemsData";
-import loading from "./assets/Loading.gif";
+
 
 //!THE  forcast data props
 export interface ForecastData {
@@ -27,10 +27,11 @@ export interface ForecastData {
 }
 interface ForcastComponentProps {
   onWeatherConditionChange: (condition: string) => void;
+  //setOverlay: (isLoading: boolean) => void;
 }
 
 const ForcastComponent: React.FC<ForcastComponentProps> = ({
-  onWeatherConditionChange,
+  onWeatherConditionChange,//setOverlay
 }) => {
   const [isCelsius, setIsCelsius] = React.useState(true);
   const [forecastData, setForecastData] = React.useState<ForecastData[]>([]);
@@ -51,10 +52,10 @@ const ForcastComponent: React.FC<ForcastComponentProps> = ({
             setForecastData(forecastWeatherData);
             if (forecastWeatherData.length > 0) {
               const currentWeatherCondition =
-                forecastWeatherData[0].weather[0].main;
-              onWeatherConditionChange(currentWeatherCondition);
+              forecastWeatherData[0].weather[0].main;
+            onWeatherConditionChange(currentWeatherCondition);
             }
-          }, 2000);
+          },3000);
         } catch (error) {
           console.error(error);
         }
@@ -77,7 +78,7 @@ const ForcastComponent: React.FC<ForcastComponentProps> = ({
         <p className={!isCelsius ? "active" : ""}>°F</p>
       </div>
 
-      {forecastData.length > 0 ? (
+      {forecastData.length > 0 && forecastData[0].dt_txt &&  (
         <ShowForcast
           dt_txt={forecastData[0].dt_txt}
           name="Auckland"
@@ -89,12 +90,7 @@ const ForcastComponent: React.FC<ForcastComponentProps> = ({
           minMaxData={forecastData.slice(0, 4)}
           isCelsius={isCelsius}
         />
-      ) : (
-        <div className="loadingWeather">
-          <img src={loading} alt="img" />
-          <p>Loading Forcast</p>
-        </div>
-      )}
+        )}
     </div>
   );
 };

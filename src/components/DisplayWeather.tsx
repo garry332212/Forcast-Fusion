@@ -2,11 +2,13 @@ import React from "react";
 import { WeatherMainContainer } from "../CSS/styles.modules";
 import ForcastComponent from "./ForcastComponent";
 import LeftWeather from "./LeftWeather";
+import loadingImg from "./assets/Loading.gif";
 
-/*!this Component  Is Parent Component of*/ //*!<SearchWeather/> & <ForcastComponent />
+
 
 const DisplayWeather = () => {
   const [weatherCondition, setWeatherCondition] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const getBackgroundClassFromWeather = (weather: string) => {
     switch (weather) {
@@ -23,24 +25,36 @@ const DisplayWeather = () => {
     }
   };
 
-  React.useEffect(() => {
-    console.log(weatherCondition);
-  });
+ 
+  React.useEffect(()=>{
+    setInterval(()=>{
+      setLoading(true)
+    },1000)
+  })
+
 
   return (
     <WeatherMainContainer>
-      <div className="container">
-        <div className={getBackgroundClassFromWeather(weatherCondition)}>
-          <div className="splitWeather">
-            <LeftWeather />
-            <div className="rightSideBar">
-              <ForcastComponent
-                onWeatherConditionChange={setWeatherCondition}
-              />
+      {loading ? (
+        <div className="container">
+          <div className={getBackgroundClassFromWeather(weatherCondition)}>
+            <div className="splitWeather">
+              <LeftWeather />
+              <div className="rightSideBar">
+                <ForcastComponent
+                  onWeatherConditionChange={setWeatherCondition}
+                  //setOverlay={setLoading} // Pass the loading state update function
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="loadingWeather">
+          <img src={loadingImg} alt="img" />
+          <p>Loading Forcast</p>
+        </div>
+      )}
     </WeatherMainContainer>
   );
 };

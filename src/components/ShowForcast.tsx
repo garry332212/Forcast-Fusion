@@ -28,7 +28,6 @@ const ShowForcast: React.FC<forcastProps> = ({
   isCelsius,
 }) => {
   //!Changing the wather from C° to F°
-
   const TemperatureDisplay: React.FC<{
     value: number;
     isCelsius: boolean;

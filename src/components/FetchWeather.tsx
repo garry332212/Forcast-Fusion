@@ -1,5 +1,4 @@
 import React from "react";
-import loadingGif from "./assets/weather.gif";
 import WeatherInfo from "./WeatherInfo";
 import { GiModernCity } from "react-icons/gi";
 import { WiHumidity, WiSunrise, WiSunset } from "react-icons/wi";
@@ -36,11 +35,7 @@ const FetchWeather: React.FC<{ cityName: string }> = ({ cityName }) => {
   const [currentWeather, setCurrentWeather] =
     React.useState<WeatherData | null>(null);
 
-  const [loading, isLoading] = React.useState(false);
-
   React.useEffect(() => {
-
-
     // Get user's current location weather and forecast
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -48,9 +43,7 @@ const FetchWeather: React.FC<{ cityName: string }> = ({ cityName }) => {
         Promise.all([fetchCurrentWeather(latitude, longitude)]).then(
           ([currentWeatherData]) => {
             setCurrentWeather(currentWeatherData);
-            setTimeout(() => {
-              isLoading(true);
-            }, 2000);
+          
           }
         );
       },
@@ -62,8 +55,7 @@ const FetchWeather: React.FC<{ cityName: string }> = ({ cityName }) => {
 
   return (
     <>
-    
-      {currentWeather && loading ? (
+      {currentWeather && (
         <>
           <WeatherInfo
             title="City"
@@ -108,12 +100,6 @@ const FetchWeather: React.FC<{ cityName: string }> = ({ cityName }) => {
             </>
           )}
         </>
-      ) : (
-        <img
-          style={{ height: "200px", paddingBlock: "3rem" }}
-          src={loadingGif}
-          alt="img"
-        />
       )}
     </>
   );
