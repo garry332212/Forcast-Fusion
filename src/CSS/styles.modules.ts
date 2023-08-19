@@ -15,16 +15,17 @@ export const WeatherMainContainer = styled.div`
 
   .loadingWeather {
     position: fixed;
-    flex-direction: column;
+    
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, #c7c7eb, #ccf2dd);
+    left:60%;
+     top:39.5%;
+    /* background: linear-gradient(to right, #c7c7eb, #ccf2dd); */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 9999; 
+   
 
     img {
       height: 150px;
@@ -58,30 +59,33 @@ export const WeatherMainContainer = styled.div`
   .rainy-bg {
     width: 90%;
     background-size: cover;
+    
     background-position: center center;
     box-sizing: border-box;
     border-radius: 10px;
     box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
     color: whitesmoke;
     transition: all 2s ease-in-out;
-    animation: slideIn 1s ease-in;
+    /* animation: slideIn 1s ease-in; */
   }
 
   .default-bg {
-    background-color: #ffffff7d;
+    background: black;
+    color:white;
+  
   }
 
   //!slide in effect keyframe
-  @keyframes slideIn {
+  /* @keyframes slideIn {
     from {
-      transform: translatey(-100%);
+      transform: translateY(100%);
       opacity: 0;
     }
     to {
       transform: translateX(0);
       opacity: 1;
     }
-  }
+  } */
 
   .splitWeather {
     display: flex;

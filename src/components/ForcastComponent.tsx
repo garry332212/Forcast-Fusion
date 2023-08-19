@@ -1,8 +1,7 @@
 import React from "react";
 import ShowForcast from "./ShowForcast";
 import { fetchForecast } from "../modules/DisplayItemsData";
-
-
+import loadingImg from "./assets/Loading.gif";
 //!THE  forcast data props
 export interface ForecastData {
   dt_txt: string; // Date of the forecast
@@ -27,14 +26,14 @@ export interface ForecastData {
 }
 interface ForcastComponentProps {
   onWeatherConditionChange: (condition: string) => void;
-  //setOverlay: (isLoading: boolean) => void;
 }
 
 const ForcastComponent: React.FC<ForcastComponentProps> = ({
-  onWeatherConditionChange,//setOverlay
+  onWeatherConditionChange,
 }) => {
   const [isCelsius, setIsCelsius] = React.useState(true);
   const [forecastData, setForecastData] = React.useState<ForecastData[]>([]);
+  const [loading, setLoading] = React.useState(false);
 
   const handleToggle = () => {
     setIsCelsius((prevIsCelsius) => !prevIsCelsius);
@@ -52,10 +51,11 @@ const ForcastComponent: React.FC<ForcastComponentProps> = ({
             setForecastData(forecastWeatherData);
             if (forecastWeatherData.length > 0) {
               const currentWeatherCondition =
-              forecastWeatherData[0].weather[0].main;
-            onWeatherConditionChange(currentWeatherCondition);
+                forecastWeatherData[0].weather[0].main;
+              onWeatherConditionChange(currentWeatherCondition);
+              setLoading(true);
             }
-          },3000);
+          }, 2000);
         } catch (error) {
           console.error(error);
         }
@@ -67,31 +67,43 @@ const ForcastComponent: React.FC<ForcastComponentProps> = ({
   }, [onWeatherConditionChange]);
 
   return (
-    <div className="forcastContainer">
-      {/*//! Toggle Beteen C & F units */}
-      <div className="temperatureToggle">
-        <p className={isCelsius ? "active" : ""}>°C</p>
-        <label className="switch">
-          <input type="checkbox" checked={!isCelsius} onChange={handleToggle} />
-          <span className="slider"></span>
-        </label>
-        <p className={!isCelsius ? "active" : ""}>°F</p>
-      </div>
-
-      {forecastData.length > 0 && forecastData[0].dt_txt &&  (
-        <ShowForcast
-          dt_txt={forecastData[0].dt_txt}
-          name="Auckland"
-          country="NZ"
-          temp={forecastData[0].main.temp}
-          main={forecastData[0].weather[0].main}
-          description={forecastData[0].weather[0].description}
-          speed={forecastData[0].wind.speed}
-          minMaxData={forecastData.slice(0, 4)}
-          isCelsius={isCelsius}
-        />
-        )}
-    </div>
+    <>
+      {loading ? (
+        <div className="forcastContainer">
+          {/*//! Toggle Beteen C & F units */}
+          <div className="temperatureToggle">
+            <p className={isCelsius ? "active" : ""}>°C</p>
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={!isCelsius}
+                onChange={handleToggle}
+              />
+              <span className="slider"></span>
+            </label>
+            <p className={!isCelsius ? "active" : ""}>°F</p>
+          </div>
+          {forecastData.length > 0 && forecastData[0].dt_txt && (
+            <ShowForcast
+              dt_txt={forecastData[0].dt_txt}
+              name="Auckland"
+              country="NZ"
+              temp={forecastData[0].main.temp}
+              main={forecastData[0].weather[0].main}
+              description={forecastData[0].weather[0].description}
+              speed={forecastData[0].wind.speed}
+              minMaxData={forecastData.slice(0, 4)}
+              isCelsius={isCelsius}
+            />
+          )}
+        </div>
+      ): (
+        <div className="loadingWeather">
+          <img src={loadingImg} alt="img" />
+          <p>Loading Forcast</p>
+        </div>
+      )}
+    </>
   );
 };
 

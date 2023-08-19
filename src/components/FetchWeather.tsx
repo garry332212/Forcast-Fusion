@@ -8,13 +8,11 @@ import { fetchCurrentWeather, formatTime } from "./../modules/DisplayItemsData";
 
 export interface WeatherData {
   name: string;
-  //*fetches as an object
   main: {
     temp: number;
     feels_like: number;
     humidity: number;
   };
-  //*fetches as an object
   sys: {
     country: string;
     sunrise: number;
@@ -43,7 +41,6 @@ const FetchWeather: React.FC<{ cityName: string }> = ({ cityName }) => {
         Promise.all([fetchCurrentWeather(latitude, longitude)]).then(
           ([currentWeatherData]) => {
             setCurrentWeather(currentWeatherData);
-          
           }
         );
       },
