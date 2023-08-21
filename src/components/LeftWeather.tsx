@@ -1,11 +1,18 @@
-import { TbSearch } from "react-icons/tb";
 import { TiWeatherPartlySunny } from "react-icons/ti";
-import FetchWeather from "./FetchWeather";
+import CurrentWeather from "./CurrentWeather";
+import { WeatherData} from "../modules/modules";
+import SearchWeather from "./SearchWeather";
 import React from "react";
 
+interface CurrentWeatherProps {
+  currentWeatherProp: WeatherData | null;
+  onSearch: (city: string) => void;
+}
+
 //!Lest Fetch The Weather Data
-const SearchWeather = () => {
-  const [cityName, setCityName] = React.useState("");
+const LeftWeather: React.FC<CurrentWeatherProps> = ({ currentWeatherProp,onSearch }) => {
+
+ 
   return (
     <div className="leftSideBar">
       <div className="title">
@@ -14,23 +21,17 @@ const SearchWeather = () => {
       </div>
 
       <div className="searchBar">
-        <input
-          type="text"
-          value={cityName}
-          onChange={(e) => setCityName(e.target.value)}
-        />
-
-        <TbSearch className="icon" />
+        <SearchWeather onSearch={onSearch}/>
       </div>
+
       <div className="searchedData">
-        <FetchWeather cityName={cityName} />
+        <CurrentWeather currentWeather={currentWeatherProp} />
       </div>
 
       <div className="copyright">
         <p>
-          Created by <span>Guri </span> -
-          <span> Using OpenWeatherMap API </span> -
-          <span> Created In ReactJS + Typescript </span>-{" "}
+          Created by <span>Guri </span> -<span> Using OpenWeatherMap API </span>{" "}
+          -<span> Created In ReactJS + Typescript </span>-{" "}
           <span>Version 1.0.0</span>
         </p>
 
@@ -46,4 +47,4 @@ const SearchWeather = () => {
   );
 };
 
-export default SearchWeather;
+export default LeftWeather;

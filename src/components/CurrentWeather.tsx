@@ -4,52 +4,14 @@ import { GiModernCity } from "react-icons/gi";
 import { WiHumidity, WiSunrise, WiSunset } from "react-icons/wi";
 import { PiThermometerCold, PiFlagDuotone } from "react-icons/pi";
 import { TiWeatherStormy } from "react-icons/ti";
-import { fetchCurrentWeather, formatTime } from "./../modules/DisplayItemsData";
 
-export interface WeatherData {
-  name: string;
-  main: {
-    temp: number;
-    feels_like: number;
-    humidity: number;
-  };
-  sys: {
-    country: string;
-    sunrise: number;
-    sunset: number;
-  };
-  timezone: number;
-  wind: {
-    speed: number;
-  };
+import { WeatherData,convertUnixTimestampToTime } from "../modules/modules";
 
-  weather: {
-    main: string;
-    description: string;
-  }[];
+interface CurrentWeatherProps {
+  currentWeather: WeatherData | null;
 }
 
-const FetchWeather: React.FC<{ cityName: string }> = ({ cityName }) => {
-  const [currentWeather, setCurrentWeather] =
-    React.useState<WeatherData | null>(null);
-
-  React.useEffect(() => {
-    // Get user's current location weather and forecast
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        Promise.all([fetchCurrentWeather(latitude, longitude)]).then(
-          ([currentWeatherData]) => {
-            setCurrentWeather(currentWeatherData);
-          }
-        );
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }, []);
-
+const CurrentWeather: React.FC<CurrentWeatherProps> = ({ currentWeather }) => {
   return (
     <>
       {currentWeather && (
@@ -86,12 +48,12 @@ const FetchWeather: React.FC<{ cityName: string }> = ({ cityName }) => {
             <>
               <WeatherInfo
                 title="Sunrise"
-                value={formatTime(currentWeather.sys.sunrise)}
+                value={convertUnixTimestampToTime(currentWeather.sys.sunrise)}
                 icon={<WiSunrise />}
               />
               <WeatherInfo
                 title="Sunset"
-                value={formatTime(currentWeather.sys.sunset)}
+                value={convertUnixTimestampToTime(currentWeather.sys.sunset)}
                 icon={<WiSunset />}
               />
             </>
@@ -102,4 +64,4 @@ const FetchWeather: React.FC<{ cityName: string }> = ({ cityName }) => {
   );
 };
 
-export default FetchWeather;
+export default CurrentWeather;

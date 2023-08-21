@@ -3,6 +3,7 @@ import { fontFamily } from "../modules/styles";
 import cloudy from "../components/assets/clouds.jpg";
 import rainy from "../components/assets/rain.jpg";
 import Clear from "../components/assets/Clear.jpg";
+import mistt from "../components/assets/mistt.jpg";
 
 //*Display Weather Styles
 export const WeatherMainContainer = styled.div`
@@ -45,12 +46,16 @@ export const WeatherMainContainer = styled.div`
 
   .sunny-bg {
     background-image: url(${Clear});
-    //text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
   }
 
   .cloudy-bg {
     background-image: url(${cloudy});
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+  }
+  .foggy-bg {
+    background-image: url(${mistt});
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
 
   .default-bg,

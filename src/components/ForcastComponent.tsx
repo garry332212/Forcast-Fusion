@@ -1,74 +1,38 @@
 import React from "react";
 import ShowForcast from "./ShowForcast";
-import { fetchForecast } from "../modules/DisplayItemsData";
-import loadingImg from "./assets/Loading.gif";
+// import loadingImg from "./assets/Loading.gif";
+import { ForecastData } from "../modules/modules";
 //!THE  forcast data props
-export interface ForecastData {
-  dt_txt: string; // Date of the forecast
-  dt: number; // timefor forecast
-  main: {
-    temp: number;
-    feels_like: number;
-    humidity: number;
-    temp_max: number;
-    temp_min: number;
-  };
 
-  //* since weather is an array element
-  weather: {
-    main: string;
-    description: string;
-  }[];
-
-  wind: {
-    speed: string;
-  };
-}
 interface ForcastComponentProps {
+  forecastData: ForecastData[];
   onWeatherConditionChange: (condition: string) => void;
 }
 
 const ForcastComponent: React.FC<ForcastComponentProps> = ({
   onWeatherConditionChange,
+  forecastData
 }) => {
   const [isCelsius, setIsCelsius] = React.useState(true);
-  const [forecastData, setForecastData] = React.useState<ForecastData[]>([]);
-  const [loading, setLoading] = React.useState(false);
+ 
 
   const handleToggle = () => {
     setIsCelsius((prevIsCelsius) => !prevIsCelsius);
   };
 
   React.useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const { latitude, longitude } = position.coords;
-        try {
-          const [forecastWeatherData] = await Promise.all([
-            fetchForecast(latitude, longitude),
-          ]);
-          setTimeout(() => {
-            setForecastData(forecastWeatherData);
-            if (forecastWeatherData.length > 0) {
-              const currentWeatherCondition =
-                forecastWeatherData[0].weather[0].main;
-              onWeatherConditionChange(currentWeatherCondition);
-              setLoading(true);
-            }
-          }, 2000);
-        } catch (error) {
-          console.error(error);
-        }
-      },
-      (error) => {
-        console.error(error);
+    
+      if (forecastData && forecastData.length > 0) {
+        const currentWeatherCondition = forecastData[0].weather[0].main;
+        onWeatherConditionChange(currentWeatherCondition);
       }
-    );
-  }, [onWeatherConditionChange]);
+  
+  }, [forecastData, onWeatherConditionChange]);
 
+ 
   return (
     <>
-      {loading ? (
+     
         <div className="forcastContainer">
           {/*//! Toggle Beteen C & F units */}
           <div className="temperatureToggle">
@@ -97,12 +61,7 @@ const ForcastComponent: React.FC<ForcastComponentProps> = ({
             />
           )}
         </div>
-      ): (
-        <div className="loadingWeather">
-          <img src={loadingImg} alt="img" />
-          <p>Loading Forcast</p>
-        </div>
-      )}
+      
     </>
   );
 };

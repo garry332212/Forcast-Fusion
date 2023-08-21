@@ -1,9 +1,8 @@
 import React from "react";
 import { BsWind } from "react-icons/bs";
 import { FaCloudMoonRain } from "react-icons/fa";
-import { formatTime, dateFormatted } from "../modules/DisplayItemsData";
-import { ForecastData } from "./ForcastComponent";
-import { celsiusToFahrenheit } from "../modules/modules";
+
+import { ForecastData, celsiusToFahrenheit, convertUnixTimestampToTime,dateFormatted } from "../modules/modules";
 interface forcastProps {
   dt_txt: string;
   name: string;
@@ -84,7 +83,7 @@ const ShowForcast: React.FC<forcastProps> = ({
 
           {minMaxData.map((forcastHourly, index) => (
             <div className="minMaxWeatherHorly" key={index}>
-              <p>{formatTime(forcastHourly.dt)}</p>
+              <p>{convertUnixTimestampToTime(forcastHourly.dt)}</p>
               <TemperatureDisplay
                 value={forcastHourly.main.temp_min}
                 isCelsius={isCelsius}
