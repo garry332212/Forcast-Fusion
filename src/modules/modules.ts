@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//enviourmental var for apis
 const api_key = process.env.REACT_APP_API_KEY;
 const api_Endpoint = process.env.REACT_APP_API_ENDPOINT;
 
