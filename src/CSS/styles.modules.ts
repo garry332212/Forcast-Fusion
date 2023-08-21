@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { fontFamily } from "../modules/styles";
+import { fontFamily } from "../modules/modules";
 import cloudy from "../components/assets/clouds.jpg";
 import rainy from "../components/assets/rain.jpg";
 import Clear from "../components/assets/Clear.jpg";

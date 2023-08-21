@@ -5,8 +5,7 @@ import { FaCloudMoonRain } from "react-icons/fa";
 import { ForecastData, celsiusToFahrenheit, convertUnixTimestampToTime,dateFormatted } from "../modules/modules";
 interface forcastProps {
   dt_txt: string;
-  name: string;
-  country: string;
+
   temp: number;
   main: string;
   description: string;
@@ -17,8 +16,7 @@ interface forcastProps {
 
 const ShowForcast: React.FC<forcastProps> = ({
   dt_txt,
-  name,
-  country,
+
   temp,
   main,
   description,
@@ -40,11 +38,6 @@ const ShowForcast: React.FC<forcastProps> = ({
 
   return (
     <div>
-      <div className="cityName">
-        <h1>{name}</h1>
-        <p>{country}</p>
-      </div>
-      {/*//! Top section for City & Weather Description */}
       <div className="topSectionWeather">
         <div className="forcastDescription">
           <h1 style={{ textTransform: "capitalize" }}>{description}</h1>
@@ -66,7 +59,7 @@ const ShowForcast: React.FC<forcastProps> = ({
         </div>
       </div>
 
-      {/*//! middle section for Forecasting */}
+ 
       <div className="middleForcasting">
         <div className="forecastHeading">
           <h1>Forecast </h1>

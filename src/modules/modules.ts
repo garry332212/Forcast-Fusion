@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const api_key = "0cc86d16bf572f78cdc96c096c7627e5";
-export const api_Endpoint = "https://api.openweathermap.org/data/2.5/";
+const api_key = process.env.REACT_APP_API_KEY;
+const api_Endpoint = process.env.REACT_APP_API_ENDPOINT;
 
 //!Type Declaration for Weather
 export interface WeatherData {
@@ -31,7 +31,6 @@ export interface WeatherData {
 }
 
 //!Type Declaration for Forecast
-
 export interface ForecastData {
   dt_txt: string; // Date of the forecast
   dt:number;
@@ -122,3 +121,14 @@ export const dateFormatted = (dateString: string | number | Date) => {
 
 //!Celsius to Fah conversion
 export const celsiusToFahrenheit = (celsius: number) => (celsius * 9) / 5 + 32;
+
+
+//!Google Fonts:
+
+export const fontFamily = {
+  roboto: "'Roboto', sans-serif",
+  wind: "'Shadows Into Light', cursive",
+  description: "'Quicksand', sans-serif",
+  temprature: "'Lumanosimo', cursive",
+  input: "'Signika Negative', sans-serif",
+};

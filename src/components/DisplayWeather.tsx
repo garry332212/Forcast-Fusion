@@ -30,7 +30,7 @@ const DisplayWeather = () => {
       case "Mist":
         return "foggy-bg";
       default:
-        return "default-bg"; // Or any default background class
+        return "default-bg";
     }
   };
 
@@ -60,6 +60,7 @@ const DisplayWeather = () => {
       const { currentWeatherData, forecastList } = await fetchWeatherData(city);
       setCurrentWeather(currentWeatherData);
       setForecastData(forecastList);
+      console.log(forecastList)
     } catch (error) {
       console.error("Unable To Find Any Results");
     }
@@ -78,6 +79,7 @@ const DisplayWeather = () => {
                 <ForcastComponent
                   onWeatherConditionChange={setWeatherCondition}
                   forecastData={forecastData}
+                  searchedCity={currentWeather}
                 />
               ) : (
                 <div className="loadingWeather">
