@@ -60,7 +60,6 @@ const DisplayWeather = () => {
       const { currentWeatherData, forecastList } = await fetchWeatherData(city);
       setCurrentWeather(currentWeatherData);
       setForecastData(forecastList);
-      console.log(forecastList)
     } catch (error) {
       console.error("Unable To Find Any Results");
     }
