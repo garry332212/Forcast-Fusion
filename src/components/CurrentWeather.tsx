@@ -48,12 +48,12 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ currentWeather }) => {
             <>
               <WeatherInfo
                 title="Sunrise"
-                value={convertUnixTimestampToTime(currentWeather.sys.sunrise)}
+                value={convertUnixTimestampToTime(currentWeather.sys.sunrise, currentWeather.timezone)}
                 icon={<WiSunrise />}
               />
               <WeatherInfo
                 title="Sunset"
-                value={convertUnixTimestampToTime(currentWeather.sys.sunset)}
+                value={convertUnixTimestampToTime(currentWeather.sys.sunset, currentWeather.timezone)}
                 icon={<WiSunset />}
               />
             </>

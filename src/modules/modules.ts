@@ -7,8 +7,8 @@ const api_Endpoint = process.env.REACT_APP_API_ENDPOINT;
 //!Type Declaration for Weather
 export interface WeatherData {
   name: string;
-  dt:number;
- 
+  dt: number;
+
   main: {
     temp: number;
     feels_like: number;
@@ -34,7 +34,7 @@ export interface WeatherData {
 //!Type Declaration for Forecast
 export interface ForecastData {
   dt_txt: string; // Date of the forecast
-  dt:number;
+  dt: number;
   city: {
     country: string;
     name: string;
@@ -51,7 +51,7 @@ export interface ForecastData {
   weather: {
     main: string;
     description: string;
-    icon:string;
+    icon: string;
   }[];
 
   wind: {
@@ -59,55 +59,67 @@ export interface ForecastData {
   };
 }
 
-  //! Search Function!
- export const fetchWeatherData = async (city: string) => {
-    try {
-      const weatherResponse = await axios.get(
-        `${api_Endpoint}weather?q=${city}&appid=${api_key}&units=metric`
-      );
-      const forecastResponse = await axios.get(
-        `${api_Endpoint}forecast?q=${city}&appid=${api_key}&units=metric`
-      );
-     
+//! Search Function!
+export const fetchWeatherData = async (city: string) => {
+  try {
+    const weatherResponse = await axios.get(
+      `${api_Endpoint}weather?q=${city}&appid=${api_key}&units=metric`
+    );
+    const forecastResponse = await axios.get(
+      `${api_Endpoint}forecast?q=${city}&appid=${api_key}&units=metric`
+    );
 
-      const currentWeatherData: WeatherData = weatherResponse.data;
-      const forecastList: ForecastData[] = forecastResponse.data.list;
-      return { currentWeatherData, forecastList };
-    } catch (error) {
-      console.error(error);
-      throw error; // Rethrow the error to handle it at the higher level
-    }
-  };
-
-  //!function to fetch the default location of the user
-  export const fetchCurrentWeather = async (lat: number, lon: number) => {
-    const url = `${api_Endpoint}weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
-    const response = await axios.get(url);
-    return response.data;
-  };
-
-  //!function to fetch the default location's forcast
-  export const fetchForecast = async (
-    lat: number,
-    lon: number
-  ): Promise<ForecastData[]> => {
-    const url = `${api_Endpoint}forecast?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
-    const response = await axios.get(url);
-    return response.data.list;
-  };
-
-//!Convert unix timestamp to human readable time from the api
-export const convertUnixTimestampToTime = (timestamp: number) => {
-  const date = new Date(timestamp * 1000); // Convert to milliseconds
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-
-  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-  const formattedMinutes = minutes.toString().padStart(2, "0");
-  return `${formattedHours}:${formattedMinutes}`;
+    const currentWeatherData: WeatherData = weatherResponse.data;
+    const forecastList: ForecastData[] = forecastResponse.data.list;
+    return { currentWeatherData, forecastList };
+  } catch (error) {
+    console.error(error);
+    throw error; // Rethrow the error to handle it at the higher level
+  }
 };
 
+//!function to fetch the default location of the user
+export const fetchCurrentWeather = async (lat: number, lon: number) => {
+  const url = `${api_Endpoint}weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
+  const response = await axios.get(url);
+  return response.data;
+};
 
+//!function to fetch the default location's forcast
+export const fetchForecast = async (
+  lat: number,
+  lon: number
+): Promise<ForecastData[]> => {
+  const url = `${api_Endpoint}forecast?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
+  const response = await axios.get(url);
+  return response.data.list;
+};
+
+//!Convert unix timestamp to human readable time from the api
+export const convertUnixTimestampToTime = (
+  timestamp: number,
+  timezoneOffset: number
+) => {
+  const date = new Date((timestamp + timezoneOffset) * 1000); // Apply timezone offset and convert to milliseconds
+  const hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+  const formattedMinutes = minutes.toString().padStart(2, "0");
+  const amPm = hours < 12 ? "AM" : "PM";
+  return `${formattedHours}:${formattedMinutes} ${amPm}`;
+};
+
+// function without timezone offset for cases where you don't need timezone conversion
+export const convertUnixTimestampToTimeNoTimezone = (timestamp: number) => {
+  const date = new Date(timestamp * 1000);
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+  const formattedMinutes = minutes.toString().padStart(2, "0");
+  const amPm = hours < 12 ? "AM" : "PM";
+
+  return `${formattedHours}:${formattedMinutes} ${amPm}`;
+};
 
 //!Function to change the date to En-UK
 export const dateFormatted = (dateString: string | number | Date) => {
@@ -122,7 +134,6 @@ export const dateFormatted = (dateString: string | number | Date) => {
 
 //!Celsius to Fah conversion
 export const celsiusToFahrenheit = (celsius: number) => (celsius * 9) / 5 + 32;
-
 
 //!Google Fonts:
 
