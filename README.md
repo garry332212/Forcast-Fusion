@@ -9,8 +9,9 @@ Cloudy ⛅️🌥️
 Sunny 🌞 
 ![image](https://github.com/garry332212/Forcast-Fusion/assets/87964388/5117c210-bfa6-4554-ad09-54dd2f6bb5f4)
 
-Rain 🌧️
-![image](https://github.com/garry332212/Forcast-Fusion/assets/87964388/9d60591d-c515-49b3-8efd-dd86720e8656)
+Rain 🌧️ + Weather In Fahrenheit 
+![image](https://github.com/garry332212/Forcast-Fusion/assets/87964388/677b2e3a-c59f-48f1-8a73-a87d1b8a6e31)
+
 
 
 
