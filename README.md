@@ -1,4 +1,6 @@
-# This App Is Based On The Data From The openWeatherApi
+# This App Is Based On The Data From The OpenWeatherMap
+![image](https://github.com/garry332212/Forcast-Fusion/assets/87964388/1582cdd5-b3fa-43fa-9d03-033e497f8aa9)
+
 
 All the information shown on the app is dynamic and fetched from the openWeatherApi free to use API
 ## Available Scripts
